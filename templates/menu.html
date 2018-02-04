@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    
+    <title>Menu</title>
+    
+</head>
+
+<body>
+
+    <h1>{{restaurant_name}}'s Menu</h1>
+    
+    <a href="{{url_for('showRestaurants')}}">Back to Restaurant List</a><br />
+    
+    <a href="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}">Create New Item</a> <br>
+    
+    {% if menu|length > 0 %}
+    
+        {%for item in menu%}
+            <p>
+                
+                {{item.name}} <br />
+                {{item.description}} <br />
+                {{item.price}} <br />
+                {{item.course}} <br />
+                <a href="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}">Edit</a> <br />
+                <a href="{{url_for('deleteMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}">Delete</a>
+                
+            </p>
+        {% endfor%}
+    
+    {% else %}
+    
+        <p>Menu will be availble soon!</p>
+    
+    {% endif%}
+    
+</body>
+
+</html>
