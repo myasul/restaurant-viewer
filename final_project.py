@@ -1,5 +1,5 @@
 ## import Flask library for web related functions ##
-from flask import Flask, render_template, url_for, request, redirect, jsonify
+from flask import Flask, render_template, url_for, request, redirect, jsonify, send_from_directory
 
 ## import sqlalchemy libarary for database functions ##
 from sqlalchemy import create_engine
@@ -49,9 +49,6 @@ def showMenuItemJSON(restaurant_id, menu_id):
 def showRestaurants():
     try:
         restaurants = session.query(Restaurant).all()
-        print("hello")
-        for rest in restaurants:
-            print(rest.name)
     except:
         restaurants = []
     return render_template("restaurants.html", restaurants=restaurants)

@@ -5,9 +5,9 @@
     <title>Restaurant Viewer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
     
-    <link rel="icon" href="../static/onepiece.ico"/> 
+    <link rel="icon" href="static/images/onepiece.ico"/> 
     
 </head>
 
@@ -17,32 +17,62 @@
         
         <div class="navbar navbar-dark bg-dark box-shadow">
             
+            <div class="container">
+            
             <strong>Restaurant Viewer</strong>
         
+            </div>
+            
         </div>
 
     </header>
     
     
+    <div class="container">
     
-    <p>
-        
-        <a href="{{url_for('newRestaurant')}}">Create New Restaurant</a>
-    
-    </p>
-    
-    {%if restaurants|length > 0%}
-        {% for i in restaurants %}
         <p>
-            <a href="{{url_for('showMenu', restaurant_id=i.id)}}">{{i.name}}</a> <br>
-            <a href="{{url_for('editRestaurant', restaurant_id=i.id)}}">Edit Restaurant</a> <br>
-            <a href="{{url_for('deleteRestaurant', restaurant_id=i.id)}}">Delete Restaurant</a>
+
+            <a href="{{url_for('newRestaurant')}}">Create New Restaurant</a>
 
         </p>
-        {% endfor %}
-    {%else%}
-        <p>There is no restaurant to show.</p>
-    {% endif %}
+
+        {%if restaurants|length > 0%}
+        
+            <div class="row">
+        
+            {% for i in restaurants %}
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    
+                    <img class="card-img-top" src="static/images/restaurant_sample_2.png">
+                    
+                    <div class="card-body">
+                        
+                        <a href="{{url_for('showMenu', restaurant_id=i.id)}}"><h5 class="card-title">{{i.name}}</h5></a>
+                        <p class="class-text">{{i.description}}</p>
+                        
+                        <div class="btn-group">
+                            
+                            <a href="{{url_for('editRestaurant', restaurant_id=i.id)}}" class="btn btn-sm btn-outline-secondary">Edit</a> <br>
+                            <a href="{{url_for('deleteRestaurant', restaurant_id=i.id)}}" class="btn btn-sm btn-outline-secondary">Delete</a>
+                        
+                        </div>
+                    
+                    </div>
+                
+                </div>
+                
+                </div>
+                
+            {% endfor %}
+  
+            </div>
+        
+        {%else%}
+            <p>There is no restaurant to show.</p>
+        {% endif %}
+        
+    </div>
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
