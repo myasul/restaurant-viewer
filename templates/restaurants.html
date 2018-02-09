@@ -3,10 +3,9 @@
 <head>
 
     <title>Restaurant Viewer</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
-    <link rel="stylesheet" href="static/css/style.css">
-    
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
     <link rel="icon" href="static/images/onepiece.ico"/> 
     
 </head>
@@ -19,7 +18,7 @@
             
             <div class="container">
             
-            <strong>Restaurant Viewer</strong>
+            <h2>Restaurant Viewer</h2>
         
             </div>
             
@@ -28,7 +27,7 @@
     </header>
     
     
-    <div class="container">
+    <div class="container rest-body">
     
         <p>
 
@@ -44,7 +43,7 @@
             <div class="col-md-4">
                 <div class="card mb-4 box-shadow">
                     
-                    <img class="card-img-top" src="static/images/restaurant_sample_2.png">
+                    <img class="card-img-top" src="static/images/uploads/{{i.image_filename}}">
                     
                     <div class="card-body">
                         
@@ -74,11 +73,9 @@
         
     </div>
     
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/popper.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
     
 </body>
 

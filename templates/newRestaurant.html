@@ -4,19 +4,59 @@
 
     <title>Create Restaurant</title>
     
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="icon" href="static/images/onepiece.ico"/> 
+    
 </head>
     
 <body>
     
-    <h1>Create a Restaurant</h1>
-    <form method="post" action="{{url_for('newRestaurant')}}">
-        <label>Name:</label>
-        <input type='text' name='restaurant-name'/><br />
-        <label>Description:</label><br />
-        <textarea name="description" rows="4" value="{{description}}"></textarea><br />
-        <button type="submit">Create</button>
-        <a href="{{url_for('showRestaurants')}}">Cancel</a>
-    </form>
+    <div class="new-restaurant-wrapper">
+    
+        <h1>Create a Restaurant</h1>
+    
+        <form method="post" action="{{url_for('newRestaurant')}}" enctype="multipart/form-data">
+
+            <div class="form-group">
+
+                <label>Name:</label>
+                <input class="form-control" type='text' name='restaurant-name'/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Description:</label>
+                <textarea class="form-control" name="description" rows="4" value="{{description}}"></textarea>
+
+            </div>
+
+            <div>
+
+                <span class="btn btn-primart btn-file form-group">
+
+                    <input  type=file name="image"/>
+
+                </span>
+
+            </div>
+
+            <div class="form-group">
+
+                <button class="btn btn-primary" type="submit">Create</button>
+
+                <a href="{{url_for('showRestaurants')}}">Cancel</a>
+
+            </div>
+
+        </form>
+    
+    </div>
+    
+    <script src="{{url_for('static',filename='css/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='css/popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='css/bootstrap.min.js')}}"></script>
     
 </body>
     
