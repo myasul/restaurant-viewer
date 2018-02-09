@@ -4,21 +4,71 @@
 
     <title>Edit Restaurant</title>
     
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="icon" href="static/images/onepiece.ico"/> 
+    
 </head>
     
 <body>
-
-    <h1>Edit Restaurant</h1>
-    <form method="post" action="{{url_for('editRestaurant', restaurant_id=restaurant_id)}}">
     
-        <label>Name:</label>
-        <input type="text" name="restaurant-name" value="{{restaurant_name}}"/>
-        <button type="submit">Edit</button>
-        <textarea name="description" cols="4" value="{{description}}"></textarea>
-        <a href="{{url_for('showRestaurants')}}">Cancel</a>
+    <div class="new-restaurant-wrapper">
+
+        <h1>Edit Restaurant</h1>
+        <form method="post" action="{{url_for('editRestaurant', restaurant_id=restaurant_id)}}" enctype="multipart/form-data">
+            
+            <div class="form-group">
+
+                <label>Name:</label>
+                <input class="form-control" type="text" name="restaurant-name" id="name" value="{{restaurant_name}}"/>
+                
+            </div>
+            
+            <div class="form-group" id="description">
+                
+                <label>Description</label>
+                <textarea class="form-control" name="description" rows="4">{{description}}</textarea>
+                
+            </div>
+            
+            <div>
+
+                <span class="btn btn-default btn-file form-group">
+
+                    <input type=file name="image"/>
+
+                </span>
+
+            </div>
+                
+           <div class="form-group">   
+               
+                <button class="btn btn-primary" type="submit">Edit</button>
+
+            
+                <a class="btn btn-secondary" href="{{url_for('showRestaurants')}}">Cancel</a>
+                
+            </div>
+
+        </form>
         
-    </form>
+    </div>
     
 </body>
+    
+    <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript">
+        
+        $('form').submit(function(){
+            
+            var input_var = ['#name', '#description'];
+            
+            
+        })
+    
+    
+    </script>
 
 </html>
