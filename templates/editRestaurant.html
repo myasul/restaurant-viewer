@@ -32,7 +32,10 @@
         <div class="modify-restaurant-wrapper">
 
             <h3>Edit Restaurant</h3>
-            <form method="post" action="{{url_for('editRestaurant', restaurant_id=restaurant_id)}}" enctype="multipart/form-data">
+            
+            <div id="restaurant-alert"></div>
+            
+            <form method="post" action="{{url_for('editRestaurant', restaurant_id=restaurant_id)}}" enctype="multipart/form-data" id="rst-form" data-modify="edit">
 
                 <div class="form-group">
 
@@ -44,7 +47,7 @@
                 <div class="form-group" id="description">
 
                     <label>Description</label>
-                    <textarea class="form-control" name="description" rows="4">{{description}}</textarea>
+                    <textarea class="form-control" name="description" rows="4" id="desc">{{description}}</textarea>
 
                 </div>
 
@@ -78,16 +81,6 @@
     <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
-    <script type="text/javascript">
-        
-        $('form').submit(function(){
-            
-            var input_var = ['#name', '#description'];
-            
-            
-        })
-    
-    
-    </script>
+    <script src="{{url_for('static',filename='js/rst_validation.js')}}"></script>
 
 </html>

@@ -31,28 +31,30 @@
         
         <div class="modify-restaurant-wrapper">
 
-            <span class="badge badge-pill badge-warning"><h3> Edit Menu Item </h3></span>
+            <span class="badge badge-pill badge-warning"><h3> Edit Menu Item </h3></span> <br /><br />
+            
+            <div id="menu-alert"></div>
 
-            <form method="post" action="{{url_for('editMenuItem',restaurant_id=restaurant_id, menu_id=menu_id)}}">
+            <form method="post" action="{{url_for('editMenuItem',restaurant_id=restaurant_id, menu_id=menu_id)}}" id="menu-form">
 
                 <div class="form-group">
 
                     <label>Name:</label> <br />
-                    <input class="form-control" type="text" name="menu-name" value="{{menu_name}}"/>
+                    <input class="form-control" type="text" name="menu-name" value="{{menu_name}}" id="name"/>
 
                 </div>
 
                 <div class="form-group">
 
                     <label>Description:</label><br />
-                    <textarea class="form-control" name="description" rows="4">{{description}}</textarea>
+                    <textarea class="form-control" name="description" rows="4" id="desc">{{description}}</textarea>
 
                 </div> 
 
                 <div class="form-group">
 
                     <label>Price:</label><br />
-                    <input class="form-control" type="text" name="price" value="{{price}}"/>
+                    <input class="form-control" type="text" name="price" value="{{price}}" id="price"/>
 
                 </div>
                 
@@ -93,7 +95,8 @@
     
     <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
-    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>    
+    <script src="{{url_for('static',filename='js/rst_validation.js')}}"></script>
     
 </body>
 

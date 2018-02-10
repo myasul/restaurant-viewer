@@ -30,21 +30,23 @@
     
         <div class="modify-restaurant-wrapper">
 
-            <h3>Create a Restaurant</h3>
+            <h3>Create a Restaurant!</h3>
+            
+            <div id="restaurant-alert"></div>
 
-            <form method="post" action="{{url_for('newRestaurant')}}" enctype="multipart/form-data">
+            <form method="post" action="{{url_for('newRestaurant')}}" enctype="multipart/form-data" id="rst-form" data-modify="create">
 
                 <div class="form-group">
 
                     <label>Name:</label>
-                    <input class="form-control" type='text' name='restaurant-name'/>
+                    <input id="name" class="form-control" type='text' name='restaurant-name'/>
 
                 </div>
 
                 <div class="form-group">
 
                     <label>Description:</label>
-                    <textarea class="form-control" name="description" rows="4" value="{{description}}"></textarea>
+                    <textarea id="desc" class="form-control" name="description" rows="4" value="{{description}}"></textarea>
 
                 </div>
 
@@ -52,7 +54,7 @@
 
                     <span class="btn btn-primart btn-file form-group">
 
-                        <input  type=file name="image"/>
+                        <input id="image" type=file name="image"/>
 
                     </span>
 
@@ -75,6 +77,7 @@
     <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/rst_validation.js')}}">   </script>
     
 </body>
     

@@ -63,7 +63,7 @@
                                 <div class="col-6">
 
                                     <a href="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="#" data-toggle="modal" data-target="#delete-modal" class="btn btn-sm btn-secondary" data-name="{{item.name}}" data-menu-id="{{item.id}}" data-rst-id="{{restaurant_id}}">Delete</a>
+                                    <a href="#" data-toggle="modal" data-target="#delete-menu" class="btn btn-sm btn-secondary" data-name="{{item.name}}" data-menu-id="{{item.id}}" data-rst-id="{{restaurant_id}}">Delete</a>
 
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
     </div>
 
     <!-- Pop-up modal to delete restaurants -->
-    <div class="modal fade" id="delete-modal" role="dialog" tabindex="-1">
+    <div class="modal fade" id="delete-menu" role="dialog" tabindex="-1">
 
         <div class="modal-dialog" role="document">
 
@@ -111,7 +111,7 @@
                     <form>
 
                         <a class="btn btn-secondary" data-dismiss="modal" id="cancel-modal">Cancel</a>
-                        <a class="btn btn-primary" id="confirm-delete-modal" data-menu-id="#" data-rst-id="3">Confirm</a>
+                        <a class="btn btn-primary" id="confirm-delete-menu" data-menu-id="#" data-rst-id="3">Confirm</a>
 
                     </form>
 
@@ -128,46 +128,6 @@
 <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
 <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
 <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
-
-<script type="text/javascript">
-    
-    $("#delete-modal").on('show.bs.modal', function(e) {
-
-        var button = $(e.relatedTarget);
-        var menu_id = button.data('menu-id');
-        var rst_id = button.data('rst-id');
-
-        $("#confirmation-message").html("Are you sure you want to delete " + button.data('name') + "?");
-        $("#confirm-delete-modal").attr("data-menu-id", menu_id);
-        $("#confirm-delete-modal").attr("data-rst-id", rst_id);
-
-    });
-
-
-    $("#confirm-delete-modal").click(function() {
-        
-        //alert("/restaurant/" + $("#confirm-delete-modal").attr("data-rst-id") + "/menu/" + $("#confirm-delete-modal").attr("data-menu-id") + "/delete");
-
-        $.ajax({
-            type: "POST",
-            url: "/restaurant/" + $("#confirm-delete-modal").attr("data-rst-id") + "/menu/" + $("#confirm-delete-modal").attr("data-menu-id") + "/delete",
-            data: "dummydata=dummydata",
-            success: function(response) {
-
-                console.log(response);
-                window.location.assign("http://localhost:5000/restaurant/" + $("#confirm-delete-modal").attr("data-rst-id") + "/menu");
-
-            },
-            error: function(error) {
-
-                console.log(error);
-
-            }
-
-        })
-
-    })
-
-</script>
+<script src="{{url_for('static',filename='js/rst_validation.js')}}"></script>
 
 </html>

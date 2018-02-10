@@ -30,28 +30,30 @@
         
         <div class='modify-restaurant-wrapper'>
 
-            <span class="badge badge-pill badge-warning"><h3>Create Menu Item</h3></span>
+            <span class="badge badge-pill badge-warning"><h3>Create Menu Item</h3></span><br /><br />
+            
+            <div id="menu-alert"></div>
 
-            <form method="post" action="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}">
+            <form method="post" action="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}" id="menu-form">
 
                 <div class="form-group">
 
                     <label>Name:</label><br />
-                    <input class="form-control" type='text' name='restaurant-name'/> 
+                    <input class="form-control" type='text' name='restaurant-name' id="name"/> 
 
                 </div>
 
                 <div class="form-group">
 
                     <label>Description:</label><br />
-                    <textarea class="form-control" name="description" rows="4"></textarea>
+                    <textarea class="form-control" name="description" rows="4" id="desc"></textarea>
 
                 </div>
 
                 <div class="form-group">
 
                     <label>Price:</label><br />
-                    <input class="form-control" type="text" name="price" />
+                    <input class="form-control" type="text" name="price" id="price"/>
 
                 </div>
                 
@@ -98,6 +100,7 @@
     <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/rst_validation.js')}}"></script>
     
 </body>
     
