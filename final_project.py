@@ -1,4 +1,5 @@
 ## import Flask library for web related functions ##
+import os
 from flask import Flask, render_template, url_for, request, redirect, jsonify, send_from_directory
 
 ## import sqlalchemy libarary for database functions ##
@@ -13,6 +14,10 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 app = Flask(__name__)
+
+# Set upload folder location
+UPLOAD_FOLDER = os.path.dirname('static/images/uploads/')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 @app.route('/restaurants/JSON')
@@ -57,10 +62,19 @@ def showRestaurants():
 @app.route('/restaurant/new', methods=['GET', 'POST'])
 def newRestaurant():
     if request.method == "POST":
+        file = request.files['image']
+
+        # save the new restaurant details in the database
         new_restaurant = Restaurant(
-            name=request.form["restaurant-name"], description=request.form["description"])
+            name=request.form["restaurant-name"], description=request.form["description"],
+            image_filename=file.filename)
         session.add(new_restaurant)
         session.commit()
+
+        # save file in upload folder
+        f = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(f)
+
         return redirect(url_for("showRestaurants"))
     else:
         return render_template("newRestaurant.html")
@@ -69,25 +83,38 @@ def newRestaurant():
 @app.route('/restaurant/<int:restaurant_id>/edit', methods=['POST', 'GET'])
 def editRestaurant(restaurant_id):
     restaurant = getRestaurant(restaurant_id)
+
     if request.method == 'POST':
+
         restaurant.name = request.form["restaurant-name"]
+        restaurant.description = request.form["description"]
+
+        if 'image' in request.files:
+            file = request.files['image']
+            restaurant.image_filename = file.filename
+            f = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            file.save(f)
+            print("hello!")
+
         session.add(restaurant)
         session.commit()
+
         return redirect(url_for("showRestaurants"))
     else:
-        return render_template("editRestaurant.html", restaurant_name=restaurant.name, restaurant_id=restaurant.id)
+        return render_template("editRestaurant.html", restaurant_name=restaurant.name,
+                               restaurant_id=restaurant.id, description=restaurant.description)
 
 
-@app.route('/restaurant/<int:restaurant_id>/delete', methods=['POST', 'GET'])
+@app.route('/restaurant/<int:restaurant_id>/delete', methods=['POST'])
 def deleteRestaurant(restaurant_id):
     restaurant = getRestaurant(restaurant_id)
-    if request.method == 'POST':
-        session.delete(restaurant)
-        session.flush()
-        session.commit()
-        return redirect(url_for("showRestaurants"))
-    else:
-        return render_template("deleteRestaurant.html", restaurant_name=restaurant.name)
+    restaurant_name = restaurant.name
+    session.delete(restaurant)
+    session.flush()
+    session.commit()
+
+    result = "{} has been successfully deleted".format(restaurant_name)
+    return jsonify(result=result)
 
 
 @app.route('/restaurant/<int:restaurant_id>/')

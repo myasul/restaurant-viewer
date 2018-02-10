@@ -53,7 +53,7 @@
                         <div class="btn-group">
                             
                             <a href="{{url_for('editRestaurant', restaurant_id=i.id)}}" class="btn btn-sm btn-outline-secondary">Edit</a> <br>
-                            <a href="{{url_for('deleteRestaurant', restaurant_id=i.id)}}" class="btn btn-sm btn-outline-secondary">Delete</a>
+                            <a href="#" data-toggle="modal" data-target="#delete-modal" class="btn btn-sm btn-outline-secondary" data-name="{{i.name}}" data-id="{{i.id}}">Delete</a>
                         
                         </div>
                     
@@ -73,9 +73,81 @@
         
     </div>
     
-    <script src="static/js/jquery.min.js"></script>
-    <script src="static/js/popper.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
+    <!-- Pop-up modal to delete restaurants -->
+    <div class="modal fade" id="delete-modal" role="dialog" tabindex="-1">
+        
+        <div class="modal-dialog" role="document">
+            
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                
+                    <h5 class="modal-title" id="delete-modal-label">Delete Restaurant</h5>
+                
+                </div>
+                
+                <div class="modal-body">
+                
+                    <div id="confirmation-message"></div>
+                    
+                </div>
+                
+                <div class="modal-footer">
+                
+                    <form>
+                        
+                        <a class="btn btn-secondary" data-dismiss="modal">Cancel</a>
+                        <a class="btn btn-primary" id="confirm-delete" data-id="#">Confirm</a>
+                        
+                    </form>
+                
+                </div>
+            
+            </div>
+        
+        </div>
+    
+    </div>
+    
+    <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    
+    <script type="text/javascript">
+    
+        $("#delete-modal").on('show.bs.modal', function(e){
+            
+            var button = $(e.relatedTarget);
+            var id = button.data('id');
+            
+            $("#confirmation-message").html("Are you sure you want to delete " + button.data('name') + "?");
+            $("#confirm-delete").attr("data-id", id);
+            
+        });
+        
+        
+        $("#confirm-delete").click(function() {
+        
+            $.ajax({
+                type: "POST",
+                url: "/restaurant/" + $("#confirm-delete").attr("data-id") + "/delete",
+                data: "dummydata=dummydata",
+                success: function(response) {
+                   
+                    console.log(response); window.location.assign("http://localhost:5000/restaurants");
+
+                },
+                error: function(error) {
+                    
+                    console.log(error);
+                    
+                }
+
+            })
+        
+    })
+        
+    </script>
     
 </body>
 
