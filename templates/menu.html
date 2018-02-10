@@ -1,40 +1,57 @@
 <html>
 
 <head>
-    
+
     <title>Menu</title>
-    
+
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="icon" href="static/images/onepiece.ico" />
+
 </head>
 
 <body>
+    
+    <header>
+        
+        <div class="navbar navbar-dark bg-dark box-shadow fixed-top">
+            
+            <div class="container">
+            
+            <h2>Restaurant Viewer</h2>
+        
+            </div>
+            
+        </div>
 
-    <h1>{{restaurant_name}}'s Menu</h1>
+    </header>
     
-    <a href="{{url_for('showRestaurants')}}">Back to Restaurant List</a><br />
-    
-    <a href="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}">Create New Item</a> <br>
-    
-    {% if menu|length > 0 %}
-    
-        {%for item in menu%}
-            <p>
-                
-                {{item.name}} <br />
-                {{item.description}} <br />
-                {{item.price}} <br />
-                {{item.course}} <br />
-                <a href="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}">Edit</a> <br />
-                <a href="{{url_for('deleteMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}">Delete</a>
-                
-            </p>
-        {% endfor%}
-    
-    {% else %}
-    
+    <div class="container rest-body">
+
+        <h1>{{restaurant_name}}'s Menu</h1>
+
+        <a href="{{url_for('showRestaurants')}}">Back to Restaurant List</a><br />
+
+        <a href="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}">Create New Item</a> <br> {% if menu|length > 0 %} {%for item in menu%}
+        <p>
+
+            {{item.name}} <br /> {{item.description}} <br /> {{item.price}} <br /> {{item.course}} <br />
+            <a href="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}">Edit</a> <br />
+            <a href="{{url_for('deleteMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}">Delete</a>
+
+        </p>
+        {% endfor%} {% else %}
+
         <p>Menu will be availble soon!</p>
-    
-    {% endif%}
-    
+
+        {% endif%}
+        
+    </div>
+
 </body>
+
+<script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
 
 </html>

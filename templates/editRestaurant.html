@@ -12,45 +12,64 @@
     
 <body>
     
-    <div class="new-restaurant-wrapper">
-
-        <h1>Edit Restaurant</h1>
-        <form method="post" action="{{url_for('editRestaurant', restaurant_id=restaurant_id)}}" enctype="multipart/form-data">
+    <header>
+        
+        <div class="navbar navbar-dark bg-dark box-shadow fixed-top">
             
-            <div class="form-group">
-
-                <label>Name:</label>
-                <input class="form-control" type="text" name="restaurant-name" id="name" value="{{restaurant_name}}"/>
-                
+            <div class="container">
+            
+            <h2>Restaurant Viewer</h2>
+        
             </div>
             
-            <div class="form-group" id="description">
-                
-                <label>Description</label>
-                <textarea class="form-control" name="description" rows="4">{{description}}</textarea>
-                
-            </div>
-            
-            <div>
+        </div>
 
-                <span class="btn btn-default btn-file form-group">
+    </header>
+    
+    
+    <div class="container rest-body">
+    
+        <div class="modify-restaurant-wrapper">
 
-                    <input type=file name="image"/>
+            <h3>Edit Restaurant</h3>
+            <form method="post" action="{{url_for('editRestaurant', restaurant_id=restaurant_id)}}" enctype="multipart/form-data">
 
-                </span>
+                <div class="form-group">
 
-            </div>
-                
-           <div class="form-group">   
-               
-                <button class="btn btn-primary" type="submit">Edit</button>
+                    <label>Name:</label>
+                    <input class="form-control" type="text" name="restaurant-name" id="name" value="{{restaurant_name}}"/>
 
-            
-                <a class="btn btn-secondary" href="{{url_for('showRestaurants')}}">Cancel</a>
-                
-            </div>
+                </div>
 
-        </form>
+                <div class="form-group" id="description">
+
+                    <label>Description</label>
+                    <textarea class="form-control" name="description" rows="4">{{description}}</textarea>
+
+                </div>
+
+                <div>
+
+                    <span class="btn btn-default btn-file form-group">
+
+                        <input type=file name="image"/>
+
+                    </span>
+
+                </div>
+
+               <div class="form-group">   
+
+                    <button class="btn btn-primary" type="submit">Edit</button>
+
+
+                    <a class="btn btn-secondary" href="{{url_for('showRestaurants')}}">Cancel</a>
+
+                </div>
+
+            </form>
+
+        </div>
         
     </div>
     

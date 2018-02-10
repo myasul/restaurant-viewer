@@ -4,48 +4,100 @@
 
     <title>Create Menu Item</title>
     
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="icon" href="static/images/onepiece.ico"/> 
+    
 </head>
     
 <body>
     
-    <h1>New Menu Item</h1>
+    <header>
+        
+        <div class="navbar navbar-dark bg-dark box-shadow fixed-top">
+            
+            <div class="container">
+            
+            <h2>Restaurant Viewer</h2>
+        
+            </div>
+            
+        </div>
+
+    </header>
     
-    <form method="post" action="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}">
+    <div class="container rest-body">
         
-        <div>
-            
-            <label>Name:</label><br />
-            <input type='text' name='restaurant-name'/> 
-            
+        <div class='modify-restaurant-wrapper'>
+
+            <span class="badge badge-pill badge-warning"><h3>Create Menu Item</h3></span>
+
+            <form method="post" action="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}">
+
+                <div class="form-group">
+
+                    <label>Name:</label><br />
+                    <input class="form-control" type='text' name='restaurant-name'/> 
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Description:</label><br />
+                    <textarea class="form-control" name="description" rows="4"></textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Price:</label><br />
+                    <input class="form-control" type="text" name="price" />
+
+                </div>
+                
+                <p>Course:</p>
+
+                <div class="form-check">
+
+                    <input class="form-check-input" type=radio name="course" id="appetizer" value="appetizer"/>
+                    <label class="form-check-label" for="appetizer">Appetizer</label>
+                
+                </div>
+                
+                <div class="form-check">
+                    
+                    <input class="form-check-input" type=radio name="course" id="enteree" value="entree"/>
+                    <label class="form-check-label" for="entree">Entree</label>
+                    
+                </div>
+                    
+                <div class="form-check">
+                    
+                    <input class="form-check-input" type=radio name="course" id="dessert" value="dessert"/>
+                    <label class="form-check-label" for="dessert">Dessert</label>
+                    
+                </div>
+                    
+                <div class="form-check">
+                    
+                    <input class="form-check-input" type=radio name="course" id="beverage" value="beverage"/>
+                    <label class="form-check-label" for="beverage">Beverage</label>
+
+                </div>
+
+                <br />
+                <button class="btn btn-primary" type="submit">Create</button>
+                <a href="{{url_for('showMenu', restaurant_id=restaurant_id)}}" class="btn btn-secondary">Cancel</a>
+
+            </form>
+
         </div>
-        
-        <div>
-        
-            <label>Description:</label><br />
-            <input type="text" name="description" />
-        
-        </div>
-        
-        <div>
-        
-            <label>Price:</label><br />
-            <input type="text" name="price" />
-        
-        </div>
-        
-        <div>
-            
-            <br /><label>Course:</label><br />
-            <input type=radio name="course" value="appetizer"/>Appetizer<br />
-            <input type=radio name="course" value="entree"/>Entree<br />
-            <input type=radio name="course" value="dessert"/>Dessert<br />
-            <input type=radio name="course" value="beverage"/>Beverage<br />
-        
-        </div>
-        
-        <br /><button type="submit">Create</button>
-        
-    </form>
+    
+    </div>
+    
+    <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
     
 </body>
     

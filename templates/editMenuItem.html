@@ -4,48 +4,96 @@
 
     <title>Edit Restaurant</title>
     
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="icon" href="static/images/onepiece.ico"/> 
+    
 </head>
     
 <body>
 
-    <h1>Edit Menu Item</h1>
-    <form method="post" action="{{url_for('editMenuItem',restaurant_id=restaurant_id, menu_id=menu_id)}}">
+    
+    <header>
         
-        <p>
+        <div class="navbar navbar-dark bg-dark box-shadow fixed-top">
             
-            <label>Name:</label> <br />
-            <input type="text" name="menu-name" value="{{menu_name}}"/>
+            <div class="container">
             
-        </p>
+            <h2>Restaurant Viewer</h2>
         
-        <p>
+            </div>
             
-            <label>Description:</label><br />
-            <input type="text" name="description" value="{{description}}"/>
+        </div>
+
+    </header>
+    
+    <div class="container rest-body">
         
-        </p> 
-        
-        <p>
-            
-            <label>Price:</label><br />
-            <input type="text" name="price" value="{{price}}"/>
-        
-        </p>
-        
-        <div>
-            
-            <br /><label>Course:</label><br />
-            <input type=radio name="course" value="appetizer" "{%if course=='appetizer'%}" checked "{% endif %}"/>Appetizer<br />
-            <input type=radio name="course" value="entree" "{%if course=='entree'%}" checked "{% endif %}"/>Entree<br />
-            <input type=radio name="course" value="dessert" "{%if course=='dessert'%}" checked "{% endif %}"/>Dessert<br />
-            <input type=radio name="course" value="beverage" "{%if course=='beverage'%}" checked "{% endif %}"/>Beverage<br />
-        
+        <div class="modify-restaurant-wrapper">
+
+            <span class="badge badge-pill badge-warning"><h3> Edit Menu Item </h3></span>
+
+            <form method="post" action="{{url_for('editMenuItem',restaurant_id=restaurant_id, menu_id=menu_id)}}">
+
+                <div class="form-group">
+
+                    <label>Name:</label> <br />
+                    <input class="form-control" type="text" name="menu-name" value="{{menu_name}}"/>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Description:</label><br />
+                    <textarea class="form-control" name="description" rows="4">{{description}}</textarea>
+
+                </div> 
+
+                <div class="form-group">
+
+                    <label>Price:</label><br />
+                    <input class="form-control" type="text" name="price" value="{{price}}"/>
+
+                </div>
+                
+                <p>Course:</p>
+
+                <div class="form-check">
+                    
+                    <input class="form-check-input" type=radio name="course" value="appetizer" "{%if course=='appetizer'%}" checked "{% endif %}"/> Appetizer
+                
+                </div>
+                
+                <div class="form-check">
+                    
+                    <input class="form-check-input" type=radio name="course" value="entree" "{%if course=='entree'%}" checked "{% endif %}"/> Entree<br />
+                    
+                </div>
+                    
+                <div class="form-check">
+                    
+                    <input class="form-check-input" type=radio name="course" value="dessert" "{%if course=='dessert'%}" checked "{% endif %}"/> Dessert<br />
+                    
+                </div>
+                    
+                <div class="form-check">
+                    
+                    <input class="form-check-input" type=radio name="course" value="beverage" "{%if course=='beverage'%}" checked "{% endif %}"/> Beverage<br />
+
+                </div>
+
+                <br /><button class="btn btn-primary" type="submit">Edit</button>
+                <a href="{{url_for('showMenu', restaurant_id=restaurant_id)}}" class="btn btn-secondary">Cancel</a>
+
+            </form>
+
         </div>
         
-        <button type="submit">Edit</button>
-        <a href="{{url_for('showMenu', restaurant_id=restaurant_id)}}">Cancel</a>
-        
-    </form>
+    </div>
+    
+    <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
     
 </body>
 

@@ -14,7 +14,7 @@
     
     <header>
         
-        <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="navbar navbar-dark bg-dark box-shadow fixed-top">
             
             <div class="container">
             
@@ -96,8 +96,8 @@
                 
                     <form>
                         
-                        <a class="btn btn-secondary" data-dismiss="modal">Cancel</a>
-                        <a class="btn btn-primary" id="confirm-delete" data-id="#">Confirm</a>
+                        <a class="btn btn-secondary" data-dismiss="modal" id="cancel-modal">Cancel</a>
+                        <a class="btn btn-primary" id="confirm-delete-modal" data-id="#">Confirm</a>
                         
                     </form>
                 
@@ -121,16 +121,16 @@
             var id = button.data('id');
             
             $("#confirmation-message").html("Are you sure you want to delete " + button.data('name') + "?");
-            $("#confirm-delete").attr("data-id", id);
+            $("#confirm-delete-modal").attr("data-id", id);
             
         });
         
         
-        $("#confirm-delete").click(function() {
+        $("#confirm-delete-modal").click(function() {
         
             $.ajax({
                 type: "POST",
-                url: "/restaurant/" + $("#confirm-delete").attr("data-id") + "/delete",
+                url: "/restaurant/" + $("#confirm-delete-modal").attr("data-id") + "/delete",
                 data: "dummydata=dummydata",
                 success: function(response) {
                    

@@ -12,46 +12,64 @@
     
 <body>
     
-    <div class="new-restaurant-wrapper">
+    <header>
+        
+        <div class="navbar navbar-dark bg-dark box-shadow fixed-top">
+            
+            <div class="container">
+            
+            <h2>Restaurant Viewer</h2>
+        
+            </div>
+            
+        </div>
+
+    </header>
     
-        <h1>Create a Restaurant</h1>
+    <div class="container rest-body">
     
-        <form method="post" action="{{url_for('newRestaurant')}}" enctype="multipart/form-data">
+        <div class="modify-restaurant-wrapper">
 
-            <div class="form-group">
+            <h3>Create a Restaurant</h3>
 
-                <label>Name:</label>
-                <input class="form-control" type='text' name='restaurant-name'/>
+            <form method="post" action="{{url_for('newRestaurant')}}" enctype="multipart/form-data">
 
-            </div>
+                <div class="form-group">
 
-            <div class="form-group">
+                    <label>Name:</label>
+                    <input class="form-control" type='text' name='restaurant-name'/>
 
-                <label>Description:</label>
-                <textarea class="form-control" name="description" rows="4" value="{{description}}"></textarea>
+                </div>
 
-            </div>
+                <div class="form-group">
 
-            <div>
+                    <label>Description:</label>
+                    <textarea class="form-control" name="description" rows="4" value="{{description}}"></textarea>
 
-                <span class="btn btn-primart btn-file form-group">
+                </div>
 
-                    <input  type=file name="image"/>
+                <div>
 
-                </span>
+                    <span class="btn btn-primart btn-file form-group">
 
-            </div>
+                        <input  type=file name="image"/>
 
-            <div class="form-group">
+                    </span>
 
-                <button class="btn btn-primary" type="submit">Create</button>
+                </div>
 
-                <a class="btn btn-secondary" href="{{url_for('showRestaurants')}}">Cancel</a>
+                <div class="form-group">
 
-            </div>
+                    <button class="btn btn-primary" type="submit">Create</button>
 
-        </form>
-    
+                    <a class="btn btn-secondary" href="{{url_for('showRestaurants')}}">Cancel</a>
+
+                </div>
+
+            </form>
+
+        </div>
+        
     </div>
     
     <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>

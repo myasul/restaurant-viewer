@@ -6,13 +6,30 @@ header {
 
 .rest-body {
  
-    padding-top: 20px;
+    padding-top: 70px;
     
 }
 
-.new-restaurant-wrapper {
+.modify-restaurant-wrapper {
     
     width: 450px;
-    margin: 20px;
+    
+}
+
+a {
+    
+    text-decoration: none; !important
+    
+}
+
+a:hover {
+    
+    text-decoration: none; !important
+    
+}
+
+#cancel-modal, #confirm-delete-modal {
+    
+    color: white;
     
 }
