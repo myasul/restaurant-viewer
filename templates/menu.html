@@ -11,41 +11,116 @@
 </head>
 
 <body>
-    
+
     <header>
-        
+
         <div class="navbar navbar-dark bg-dark box-shadow fixed-top">
-            
+
             <div class="container">
-            
-            <h2>Restaurant Viewer</h2>
-        
+
+                <h2>Restaurant Viewer</h2>
+
             </div>
-            
+
         </div>
 
     </header>
-    
+
     <div class="container rest-body">
 
         <h1>{{restaurant_name}}'s Menu</h1>
 
         <a href="{{url_for('showRestaurants')}}">Back to Restaurant List</a><br />
 
-        <a href="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}">Create New Item</a> <br> {% if menu|length > 0 %} {%for item in menu%}
-        <p>
+        <a href="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}">Create New Item</a>
 
-            {{item.name}} <br /> {{item.description}} <br /> {{item.price}} <br /> {{item.course}} <br />
-            <a href="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}">Edit</a> <br />
-            <a href="{{url_for('deleteMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}">Delete</a>
+        <div class="menu-wrapper">
 
-        </p>
-        {% endfor%} {% else %}
+            {% if menu|length > 0 %}
 
-        <p>Menu will be availble soon!</p>
+            <div class="row">
 
-        {% endif%}
-        
+                {%for item in menu%}
+
+                <div class="col-md-4">
+
+                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+
+                        <div class="card-header">{{item.name}}</div>
+
+                        <div class="card-body text-dark">
+
+                            <p class="card-text">{{item.description}}</p>
+
+                        </div>
+
+                        <div class="card-footer">
+
+                            <div class="row">
+
+                                <span class="col-6">{{item.price}}</span>
+
+                                <div class="col-6">
+
+                                    <a href="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=item.id)}}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="#" data-toggle="modal" data-target="#delete-modal" class="btn btn-sm btn-secondary" data-name="{{item.name}}" data-menu-id="{{item.id}}" data-rst-id="{{restaurant_id}}">Delete</a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                {% endfor%} {% else %}
+
+                <p>Menu will be availble soon!</p>
+
+                {% endif%}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Pop-up modal to delete restaurants -->
+    <div class="modal fade" id="delete-modal" role="dialog" tabindex="-1">
+
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="delete-modal-label">Delete Menu item</h5>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div id="confirmation-message"></div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <form>
+
+                        <a class="btn btn-secondary" data-dismiss="modal" id="cancel-modal">Cancel</a>
+                        <a class="btn btn-primary" id="confirm-delete-modal" data-menu-id="#" data-rst-id="3">Confirm</a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </body>
@@ -53,5 +128,46 @@
 <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
 <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
 <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+
+<script type="text/javascript">
+    
+    $("#delete-modal").on('show.bs.modal', function(e) {
+
+        var button = $(e.relatedTarget);
+        var menu_id = button.data('menu-id');
+        var rst_id = button.data('rst-id');
+
+        $("#confirmation-message").html("Are you sure you want to delete " + button.data('name') + "?");
+        $("#confirm-delete-modal").attr("data-menu-id", menu_id);
+        $("#confirm-delete-modal").attr("data-rst-id", rst_id);
+
+    });
+
+
+    $("#confirm-delete-modal").click(function() {
+        
+        //alert("/restaurant/" + $("#confirm-delete-modal").attr("data-rst-id") + "/menu/" + $("#confirm-delete-modal").attr("data-menu-id") + "/delete");
+
+        $.ajax({
+            type: "POST",
+            url: "/restaurant/" + $("#confirm-delete-modal").attr("data-rst-id") + "/menu/" + $("#confirm-delete-modal").attr("data-menu-id") + "/delete",
+            data: "dummydata=dummydata",
+            success: function(response) {
+
+                console.log(response);
+                window.location.assign("http://localhost:5000/restaurant/" + $("#confirm-delete-modal").attr("data-rst-id") + "/menu");
+
+            },
+            error: function(error) {
+
+                console.log(error);
+
+            }
+
+        })
+
+    })
+
+</script>
 
 </html>

@@ -41,11 +41,12 @@
         
             {% for i in restaurants %}
             <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
+                
+                <div class="card mb-4 box-shadow border-dark">
                     
                     <img class="card-img-top" src="static/images/uploads/{{i.image_filename}}">
                     
-                    <div class="card-body">
+                    <div class="card-body text-dark">
                         
                         <a href="{{url_for('showMenu', restaurant_id=i.id)}}"><h5 class="card-title">{{i.name}}</h5></a>
                         <p class="class-text">{{i.description}}</p>
